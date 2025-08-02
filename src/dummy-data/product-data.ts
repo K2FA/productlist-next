@@ -1,6 +1,6 @@
-import { ProductCardProps } from '@/types/product-type';
+import { ProductType } from '@/types/product-type';
 
-export const ProductListData: ProductCardProps[] = [
+export const ProductListData: ProductType[] = [
   {
     name: 'Product 1',
     price: 1000,

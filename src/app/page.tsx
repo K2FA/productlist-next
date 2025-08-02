@@ -1,9 +1,9 @@
 'use client';
 
-import { ProductCard } from '@/components/cards/product-card';
 import { EmptyNotification } from '@/components/notifications/empy-notification';
-import { ProductCardSkeleton } from '@/components/skeletons/product-card-skeleton';
 import { ProductListData } from '@/dummy-data/product-data';
+import { ProductHeader } from '@/sections/product-header/product-header';
+import { ProductList } from '@/sections/product-list/product-list';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -17,26 +17,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div className='w-full min-h-screen px-10'>
+    <div className='w-full min-h-screen p-10'>
       {productList.length === 0 && <EmptyNotification label='Product' />}
 
-      <div className='w-full min-h-screen flex flex-wrap items-center'>
-        <div className='w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4  gap-8'>
-          {isLoading ? (
-            <ProductCardSkeleton />
-          ) : (
-            <>
-              {productList.map((product, index) => (
-                <ProductCard
-                  key={index}
-                  name={product.name}
-                  price={product.price}
-                  stock={product.stock}
-                />
-              ))}
-            </>
-          )}
-        </div>
+      <div className='w-full min-h-screen flex flex-col justify-center gap-10'>
+        <ProductHeader />
+        <ProductList
+          isLoading={isLoading}
+          productList={productList}
+        />
       </div>
     </div>
   );

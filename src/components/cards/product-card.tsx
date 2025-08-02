@@ -1,8 +1,10 @@
-import { ProductCardProps } from '@/types/product-type';
-import { SquarePen, Trash2 } from 'lucide-react';
+import { ProductType } from '@/types/product-type';
+import { SquarePen } from 'lucide-react';
+import Link from 'next/link';
+import { DeleteButton } from '../buttons/delete-button';
 import { Card, CardContent, CardFooter } from '../ui/card';
 
-export function ProductCard({ name, price, stock }: ProductCardProps) {
+export function ProductCard({ name, price, stock }: ProductType) {
   return (
     <Card>
       <CardContent className='w-full flex flex-col items-center justify-center text-center gap-4'>
@@ -17,14 +19,13 @@ export function ProductCard({ name, price, stock }: ProductCardProps) {
       </CardContent>
 
       <CardFooter className='w-full flex justify-center gap-4'>
-        <button className='py-1 px-2 bg-yellow-500 text-white rounded flex gap-1'>
+        <Link
+          href='/edit'
+          className='py-1 px-2 bg-yellow-500 text-white rounded flex gap-1'>
           <SquarePen className='w-4' />
           Edit
-        </button>
-        <button className='py-1 px-2 bg-red-500 text-white rounded flex gap-1'>
-          <Trash2 className='w-4' />
-          Hapus
-        </button>
+        </Link>
+        <DeleteButton />
       </CardFooter>
     </Card>
   );
