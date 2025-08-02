@@ -20,8 +20,8 @@ export default function Home() {
     <div className='w-full min-h-screen px-10'>
       {productList.length === 0 && <EmptyNotification label='Product' />}
 
-      <div className='w-full min-h-screen flex items-center'>
-        <div className='w-full grid grid-cols-4 gap-8'>
+      <div className='w-full min-h-screen flex flex-wrap items-center'>
+        <div className='w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4  gap-8'>
           {isLoading ? (
             <ProductCardSkeleton />
           ) : (
