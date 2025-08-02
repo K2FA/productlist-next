@@ -3,8 +3,16 @@ import { SquarePen } from 'lucide-react';
 import Link from 'next/link';
 import { DeleteButton } from '../buttons/delete-button';
 import { Card, CardContent, CardFooter } from '../ui/card';
+import { Dispatch, SetStateAction } from 'react';
 
-export function ProductCard({ name, price, stock }: ProductType) {
+export function ProductCard({
+  id,
+  name,
+  price,
+  stock,
+  onDelete,
+  setPendingDeleteId,
+}: ProductType & { onDelete: () => void; setPendingDeleteId: Dispatch<SetStateAction<number | null>> }) {
   return (
     <Card>
       <CardContent className='w-full flex flex-col items-center justify-center text-center gap-4'>
@@ -25,7 +33,11 @@ export function ProductCard({ name, price, stock }: ProductType) {
           <SquarePen className='w-4' />
           Edit
         </Link>
-        <DeleteButton />
+        <DeleteButton
+          id={id}
+          onDelete={onDelete}
+          setPendingDeleteId={setPendingDeleteId}
+        />
       </CardFooter>
     </Card>
   );

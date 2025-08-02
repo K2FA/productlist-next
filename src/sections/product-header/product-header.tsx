@@ -14,7 +14,7 @@ export function ProductHeader({ onChange }: ProductHeaderProps) {
         <Input
           type='text'
           id='search'
-          placeholder='Search'
+          placeholder='Cari produk...'
           className='w-full'
           onChange={onChange}
         />
