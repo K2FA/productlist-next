@@ -1,14 +1,16 @@
 'use client';
 
-import { EmptyNotification } from '@/components/notifications/empy-notification';
 import { ProductListData } from '@/dummy-data/product-data';
 import { ProductHeader } from '@/sections/product-header/product-header';
 import { ProductList } from '@/sections/product-list/product-list';
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 export default function Home() {
   const [productList, setProductList] = useState(ProductListData);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [inputValue, setInputValue] = useState<string>('');
+  const [inputDebounce, setInputDebounce] = useState<string>('');
 
   useEffect(() => {
     setTimeout(() => {
@@ -16,16 +18,41 @@ export default function Home() {
     }, 2000);
   }, []);
 
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  useEffect(() => {
+    const delayedInput = setTimeout(() => {
+      setInputDebounce(inputValue);
+    }, 300);
+    return () => clearTimeout(delayedInput);
+  }, [inputValue]);
+
+  useEffect(() => {
+    if (inputDebounce === '') {
+      setProductList(ProductListData);
+    } else {
+      const result = ProductListData.filter((product) => product.name.includes(inputDebounce));
+
+      setProductList(result);
+    }
+  }, [inputDebounce]);
+
   return (
     <div className='w-full min-h-screen p-10'>
-      {productList.length === 0 && <EmptyNotification label='Product' />}
-
       <div className='w-full min-h-screen flex flex-col justify-center gap-10'>
-        <ProductHeader />
+        <ProductHeader onChange={handleSearch} />
         <ProductList
           isLoading={isLoading}
           productList={productList}
         />
+
+        <Link
+          href='/datatable'
+          className='size-fit py-2 px-4 rounded flex gap-1 border border-solid border-black/50 bg-amber-200'>
+          Tabel Pokemon
+        </Link>
       </div>
     </div>
   );

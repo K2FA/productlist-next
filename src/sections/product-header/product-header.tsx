@@ -1,8 +1,13 @@
 import { AddNavButton } from '@/components/buttons/add-nav-button';
 import { FilterSelect } from '@/components/selects/filter-select';
 import { Input } from '@/components/ui/input';
+import { ChangeEvent } from 'react';
 
-export function ProductHeader() {
+interface ProductHeaderProps {
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export function ProductHeader({ onChange }: ProductHeaderProps) {
   return (
     <div className='w-full flex flex-wrap justify-between gap-y-4'>
       <div className='md:w-1/2 lg:w-2/3 xl:w-3/4 2xl:w-4/5'>
@@ -11,6 +16,7 @@ export function ProductHeader() {
           id='search'
           placeholder='Search'
           className='w-full'
+          onChange={onChange}
         />
       </div>
       <div className='flex gap-4'>
