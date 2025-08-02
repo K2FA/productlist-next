@@ -15,6 +15,8 @@ export default function Home() {
   const [inputDebounce, setInputDebounce] = useState<string>('');
 
   const [pendingDeleteName, setPendingDeleteName] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<'price' | 'stock' | ''>('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,14 +36,24 @@ export default function Home() {
   }, [inputValue]);
 
   useEffect(() => {
+    let result = [...ProductListData];
+
     if (inputDebounce === '') {
       setProductList(ProductListData);
     } else {
-      const result = ProductListData.filter((product) => product.name.includes(inputDebounce));
+      result = result.filter((product) => product.name.includes(inputDebounce));
 
+      if (sortBy) {
+        result.sort((a, b) => {
+          const valueA = a[sortBy];
+          const valueB = b[sortBy];
+
+          return sortOrder === 'asc' ? valueA - valueB : valueB - valueA;
+        });
+      }
       setProductList(result);
     }
-  }, [inputDebounce]);
+  }, [inputDebounce, sortBy, sortOrder]);
 
   const handleDelete = () => {
     if (pendingDeleteName !== null) {
