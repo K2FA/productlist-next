@@ -14,6 +14,7 @@ export function LabelInput({ label, type, name }: LabelInputProps) {
         type={type}
         id={name}
         placeholder={`Massukan ${name}`}
+        required
       />
     </label>
   );

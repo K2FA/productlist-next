@@ -6,25 +6,27 @@ export function FormInput() {
     <div className='w-full space-y-4 mb-10'>
       <h1 className='text-4xl'>Tambah</h1>
 
-      <LabelInput
-        name='name'
-        type='text'
-        label='Name'
-      />
+      <form className='space-y-4'>
+        <LabelInput
+          name='name'
+          type='text'
+          label='Name'
+        />
 
-      <LabelInput
-        name='price'
-        type='number'
-        label='Price'
-      />
+        <LabelInput
+          name='price'
+          type='number'
+          label='Price'
+        />
 
-      <LabelInput
-        name='stock'
-        type='number'
-        label='Stock'
-      />
+        <LabelInput
+          name='stock'
+          type='number'
+          label='Stock'
+        />
 
-      <SubmitButton />
+        <SubmitButton />
+      </form>
     </div>
   );
 }
