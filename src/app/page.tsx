@@ -1,11 +1,12 @@
 'use client';
 
+import { ProductHeader } from '@/app/_sections/product-header/product-header';
+import { ProductList } from '@/app/_sections/product-list/product-list';
 import { EmptyNotification } from '@/components/notifications/empy-notification';
 import { ProductListData } from '@/dummy-data/product-data';
-import { ProductHeader } from '@/sections/product-header/product-header';
-import { ProductList } from '@/sections/product-list/product-list';
 import Link from 'next/link';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { FormInput } from './_sections/form-input/form-input';
 
 export default function Home() {
   const [productList, setProductList] = useState(ProductListData);
@@ -13,7 +14,7 @@ export default function Home() {
   const [inputValue, setInputValue] = useState<string>('');
   const [inputDebounce, setInputDebounce] = useState<string>('');
 
-  const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
+  const [pendingDeleteName, setPendingDeleteName] = useState<string | null>(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -43,15 +44,17 @@ export default function Home() {
   }, [inputDebounce]);
 
   const handleDelete = () => {
-    if (pendingDeleteId !== null) {
-      setProductList((prev) => prev.filter((product) => product.id !== pendingDeleteId));
-      setPendingDeleteId(null);
+    if (pendingDeleteName !== null) {
+      setProductList((prev) => prev.filter((product) => product.name !== pendingDeleteName));
+      setPendingDeleteName(null);
     }
   };
 
   return (
     <div className='w-full min-h-screen p-10'>
       <div className='w-full min-h-screen flex flex-col justify-center gap-10'>
+        <FormInput />
+
         <ProductHeader onChange={handleSearch} />
         {productList.length === 0 && <EmptyNotification label='Product' />}
 
@@ -59,7 +62,7 @@ export default function Home() {
           isLoading={isLoading}
           productList={productList}
           onDelete={handleDelete}
-          setPendingDeleteId={setPendingDeleteId}
+          setPendingDeleteName={setPendingDeleteName}
         />
 
         <Link

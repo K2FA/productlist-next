@@ -1,4 +1,3 @@
-import { AddNavButton } from '@/components/buttons/add-nav-button';
 import { FilterSelect } from '@/components/selects/filter-select';
 import { Input } from '@/components/ui/input';
 import { ChangeEvent } from 'react';
@@ -21,8 +20,6 @@ export function ProductHeader({ onChange }: ProductHeaderProps) {
       </div>
       <div className='flex gap-4'>
         <FilterSelect />
-
-        <AddNavButton />
       </div>
     </div>
   );

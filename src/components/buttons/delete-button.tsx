@@ -1,4 +1,5 @@
 import { Trash2 } from 'lucide-react';
+import { Dispatch, SetStateAction } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,22 +11,21 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '../ui/alert-dialog';
-import { Dispatch, SetStateAction } from 'react';
 
 export function DeleteButton({
-  id,
+  name,
   onDelete,
-  setPendingDeleteId,
+  setPendingDeleteName,
 }: {
-  id: number;
+  name: string;
   onDelete: () => void;
-  setPendingDeleteId: Dispatch<SetStateAction<number | null>>;
+  setPendingDeleteName: Dispatch<SetStateAction<string | null>>;
 }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger
         className='py-1 px-2 bg-red-500 text-white rounded flex gap-1 cursor-pointer'
-        onClick={() => setPendingDeleteId(id)}>
+        onClick={() => setPendingDeleteName(name)}>
         <Trash2 className='w-4' />
         Hapus
       </AlertDialogTrigger>

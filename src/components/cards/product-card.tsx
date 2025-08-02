@@ -1,18 +1,17 @@
 import { ProductType } from '@/types/product-type';
 import { SquarePen } from 'lucide-react';
 import Link from 'next/link';
+import { Dispatch, SetStateAction } from 'react';
 import { DeleteButton } from '../buttons/delete-button';
 import { Card, CardContent, CardFooter } from '../ui/card';
-import { Dispatch, SetStateAction } from 'react';
 
 export function ProductCard({
-  id,
   name,
   price,
   stock,
   onDelete,
-  setPendingDeleteId,
-}: ProductType & { onDelete: () => void; setPendingDeleteId: Dispatch<SetStateAction<number | null>> }) {
+  setPendingDeleteName,
+}: ProductType & { onDelete: () => void; setPendingDeleteName: Dispatch<SetStateAction<string | null>> }) {
   return (
     <Card>
       <CardContent className='w-full flex flex-col items-center justify-center text-center gap-4'>
@@ -34,9 +33,9 @@ export function ProductCard({
           Edit
         </Link>
         <DeleteButton
-          id={id}
+          name={name}
           onDelete={onDelete}
-          setPendingDeleteId={setPendingDeleteId}
+          setPendingDeleteName={setPendingDeleteName}
         />
       </CardFooter>
     </Card>
